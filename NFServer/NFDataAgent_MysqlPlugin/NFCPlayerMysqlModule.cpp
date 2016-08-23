@@ -45,7 +45,7 @@ bool NFCPlayerMysqlModule::AfterInit()
         return false;
     }
 
-    NFList<std::string>& xNameList = pLogicClass->GetConfigNameList();
+    NFList<std::string>& xNameList = pLogicClass->GetIdList();
     std::string strConfigName; 
     if (!xNameList.Get(0, strConfigName))
     {

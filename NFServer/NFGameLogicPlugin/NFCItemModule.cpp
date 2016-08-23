@@ -78,7 +78,7 @@ bool NFCItemModule::CheckConfig()
 		assert(0);
 	}
 
-	NFList<std::string>& configList = pLogicCLass->GetConfigNameList();
+	NFList<std::string>& configList = pLogicCLass->GetIdList();
 	std::string strConfigID;
 	bool bRet = configList.First(strConfigID);
 

@@ -52,7 +52,7 @@ NF_SHARE_PTR<NFIPropertyManager> NFCCommonRedisModule::NewPropertyManager(const 
             xProperty->SetPrivate(pStaticConfigPropertyInfo->GetPrivate());
             xProperty->SetSave(pStaticConfigPropertyInfo->GetSave());
             xProperty->SetCache(pStaticConfigPropertyInfo->GetCache());
-            xProperty->SetRelationValue(pStaticConfigPropertyInfo->GetRelationValue());
+            xProperty->SetRef(pStaticConfigPropertyInfo->GetRef());
 
             pStaticConfigPropertyInfo = pStaticClassPropertyManager->Next();
         }
