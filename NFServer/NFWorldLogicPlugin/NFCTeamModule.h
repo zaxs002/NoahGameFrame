@@ -12,7 +12,6 @@
 #include "NFComm/NFCore/NFMap.h"
 #include "NFComm/NFPluginModule/NFIKernelModule.h"
 #include "NFComm/NFPluginModule/NFITeamModule.h"
-#include "NFComm/NFPluginModule/NFIUUIDModule.h"
 #include "NFComm/NFPluginModule/NFILogModule.h"
 #include "NFComm/NFPluginModule/NFIGameServerNet_ServerModule.h"
 #include "NFComm/NFPluginModule/NFIWorldNet_ServerModule.h"
@@ -57,7 +56,6 @@ protected:
 
 protected:
     NFIKernelModule* m_pKernelModule;
-    NFIUUIDModule* m_pUUIDModule;
 	NFIWorldNet_ServerModule* m_pWorldNet_ServerModule;
 	NFILogModule* m_pLogModule;
     NFICommonRedisModule* m_pCommonRedisModule;

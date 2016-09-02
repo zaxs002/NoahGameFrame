@@ -51,7 +51,6 @@ bool NFCGSTeamModule::AfterInit()
     m_pLevelModule = pPluginManager->FindModule<NFILevelModule>();
     m_pPackModule = pPluginManager->FindModule<NFIPackModule>();
     m_pHeroModule = pPluginManager->FindModule<NFIHeroModule>();
-    m_pUUIDModule = pPluginManager->FindModule<NFIUUIDModule>();
     m_pGSSwitchServerModule = pPluginManager->FindModule<NFIGSSwichServerModule>();
 
     return true;
@@ -64,7 +63,7 @@ void NFCGSTeamModule::OnReqCreateTeamFromClient(const int nSockIndex, const int 
     NFGUID xTeamID = NFINetModule::PBToNF(xMsg.team_id());
     if (xTeamID.IsNull())
     {
-        xTeamID = m_pUUIDModule->CreateGUID();
+        xTeamID = m_pKernelModule->CreateGUID();
 
         *xMsg.mutable_team_id() = NFINetModule::NFToPB(xTeamID);
     }

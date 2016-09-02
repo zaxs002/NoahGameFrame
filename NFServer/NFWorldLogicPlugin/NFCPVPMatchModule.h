@@ -16,7 +16,6 @@
 #include "NFComm/NFPluginModule/NFIPropertyConfigModule.h"
 #include "NFComm/NFPluginModule/NFIPluginManager.h"
 #include "NFComm/NFPluginModule/NFIGameServerNet_ServerModule.h"
-#include "NFComm/NFPluginModule/NFIUUIDModule.h"
 #include "NFComm/NFPluginModule/NFIPVPMatchRedisModule.h"
 #include "NFComm/NFPluginModule/NFIWorldNet_ServerModule.h"
 #include "NFComm/NFPluginModule/NFITeamModule.h"
@@ -68,7 +67,6 @@ private:
     NFIKernelModule* m_pKernelModule;
     NFILogModule* m_pLogModule;
 	NFIGameServerNet_ServerModule* m_pGameServerNet_ServerModule;
-    NFIUUIDModule* m_pUUIDModule;
     NFIPVPMatchRedisModule* m_pPVPMatchRedisModule;
 	NFIWorldNet_ServerModule* m_pWorldNet_ServerModule;
 	NFITeamModule* m_pTeamModule;

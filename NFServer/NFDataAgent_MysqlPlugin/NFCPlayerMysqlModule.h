@@ -13,7 +13,6 @@
 #include "NFComm/NFPluginModule/NFIGameLogicModule.h"
 #include "NFComm/NFPluginModule/NFIPlayerMysqlModule.h"
 #include "NFComm/NFPluginModule/NFIMysqlModule.h"
-#include "NFComm/NFPluginModule/NFIUUIDModule.h"
 #include "NFComm/NFPluginModule/NFIPluginManager.h"
 #include "NFComm/NFMessageDefine/NFMsgDefine.h"
 #include "NFComm/NFPluginModule/NFIClassModule.h"
@@ -70,7 +69,6 @@ private:
     NFIKernelModule* m_pKernelModule;
     NFIMysqlModule* m_pClusterSQLModule;
     NFIAsyMysqlModule* m_pAsyClusterSQLModule;
-	NFIUUIDModule* m_pUUIDModule;
 	NFIClassModule* m_pLogicClassModule;
 	NFILogModule* m_pLogModule;
     NFIElementModule* m_pElementModule;

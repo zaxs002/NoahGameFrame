@@ -20,7 +20,6 @@ bool NFCHeroPropertyModule::AfterInit()
 	m_pKernelModule = pPluginManager->FindModule<NFIKernelModule>();
 	m_pLogicClassModule = pPluginManager->FindModule<NFIClassModule>();
 	m_pGameServerNet_ServerModule = pPluginManager->FindModule<NFIGameServerNet_ServerModule>();
-	m_pUUIDModule = pPluginManager->FindModule<NFIUUIDModule>();
 	m_pElementModule = pPluginManager->FindModule<NFIElementModule>();
 	m_pEquipPropertyModule = pPluginManager->FindModule<NFIEquipPropertyModule>();
 

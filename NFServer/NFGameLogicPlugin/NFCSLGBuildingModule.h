@@ -11,7 +11,6 @@
 #include "NFComm/NFPluginModule/NFISLGBuildingModule.h"
 #include "NFComm/NFPluginModule/NFIKernelModule.h"
 #include "NFComm/NFPluginModule/NFILogModule.h"
-#include "NFComm/NFPluginModule/NFIUUIDModule.h"
 #include "NFComm/NFPluginModule/NFIPluginManager.h"
 #include "NFComm/NFPluginModule/NFIGameServerNet_ServerModule.h"
 
@@ -60,7 +59,6 @@ protected:
 private:
 	NFIKernelModule* m_pKernelModule;
 	NFILogModule* m_pLogModule;
-	NFIUUIDModule* m_pUUIDModule;
 	NFIGameServerNet_ServerModule* m_pGameServerNet_ServerModule;
 };
 

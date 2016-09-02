@@ -32,7 +32,6 @@ bool NFCPackModule::AfterInit()
     m_pSceneProcessModule = pPluginManager->FindModule<NFISceneProcessModule>();
     m_pPropertyModule = pPluginManager->FindModule<NFIPropertyModule>();
     m_pLogModule = pPluginManager->FindModule<NFILogModule>();
-    m_pUUIDModule = pPluginManager->FindModule<NFIUUIDModule>();
 
     return true;
 }
@@ -65,7 +64,7 @@ const NFGUID& NFCPackModule::CreateEquip( const NFGUID& self, const std::string&
 		return NULL_OBJECT;
 	}
 
-	NFGUID ident = m_pUUIDModule->CreateGUID();
+	NFGUID ident = m_pKernelModule->CreateGUID();
 
 	NF_SHARE_PTR<NFIDataList> var = pRecord->GetInitData();
 

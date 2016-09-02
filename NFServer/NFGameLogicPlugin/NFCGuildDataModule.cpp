@@ -32,16 +32,12 @@ bool NFCGuildDataModule::Execute()
 bool NFCGuildDataModule::AfterInit()
 {
     m_pKernelModule = pPluginManager->FindModule<NFIKernelModule>();
-    m_pUUIDModule = pPluginManager->FindModule<NFIUUIDModule>();
     m_pMysqlModule = pPluginManager->FindModule<NFIMysqlModule>();
     m_pPlayerMysqlModule = pPluginManager->FindModule<NFIPlayerMysqlModule>();
     m_pCommonConfigModule = pPluginManager->FindModule<NFICommonConfigModule>();
 
     m_pPlayerMysqlModule->RegisterAutoSave(NFrame::Guild::ThisName());
     m_pKernelModule->AddClassCallBack(NFrame::Guild::ThisName(), this, &NFCGuildDataModule::OnGuildClassEvent);
-
-
-    m_pUUIDModule->SetIdentID(pPluginManager->AppID());
 
     int nScenceID = m_pCommonConfigModule->GetAttributeInt("GuildEctype", "GuildEctypeInfo", "ScenceID");
     if (nScenceID <=0)
@@ -113,7 +109,7 @@ const NFGUID NFCGuildDataModule::CreateGuild(const NFGUID& xPlayeID, const std::
         return NULL_OBJECT;
     }
 
-    const NFGUID xGuidID = m_pUUIDModule->CreateGUID();
+    const NFGUID xGuidID = m_pKernelModule->CreateGUID();
 
     //Guild
     std::vector<std::string> vGuildFieldVec;

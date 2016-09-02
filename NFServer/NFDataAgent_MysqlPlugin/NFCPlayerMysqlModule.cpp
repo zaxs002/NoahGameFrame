@@ -33,7 +33,6 @@ bool NFCPlayerMysqlModule::AfterInit()
 {
     m_pKernelModule = pPluginManager->FindModule<NFIKernelModule>();
     m_pClusterSQLModule = pPluginManager->FindModule<NFIMysqlModule>();
-	m_pUUIDModule = pPluginManager->FindModule<NFIUUIDModule>();
 	m_pLogicClassModule = pPluginManager->FindModule<NFIClassModule>();
     m_pLogModule = pPluginManager->FindModule<NFILogModule>();
     m_pElementModule = pPluginManager->FindModule<NFIElementModule>();
@@ -112,7 +111,7 @@ const NFGUID NFCPlayerMysqlModule::CreateRole( const std::string& strAccount, co
 		return NULL_OBJECT;
 	}
 
-	NFGUID xID = m_pUUIDModule->CreateGUID();
+	NFGUID xID = m_pKernelModule->CreateGUID();
 
 	vFieldVec.clear();
 	vValueVec.clear();

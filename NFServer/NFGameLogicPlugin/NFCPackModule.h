@@ -16,7 +16,6 @@
 #include "NFComm/NFPluginModule/NFISceneProcessModule.h"
 #include "NFComm/NFPluginModule/NFIPropertyModule.h"
 #include "NFComm/NFPluginModule/NFILogModule.h"
-#include "NFComm/NFPluginModule/NFIUUIDModule.h"
 #include "NFComm/NFPluginModule/NFIPluginManager.h"
 #include "NFComm/NFMessageDefine/NFProtocolDefine.hpp"
 
@@ -50,7 +49,6 @@ private:
     NFIElementModule* m_pElementModule;
     NFISceneProcessModule* m_pSceneProcessModule;
     NFIPropertyModule* m_pPropertyModule;
-    NFIUUIDModule* m_pUUIDModule;
 };
 
 

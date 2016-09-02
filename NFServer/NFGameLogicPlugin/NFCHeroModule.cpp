@@ -33,7 +33,6 @@ bool NFCHeroModule::AfterInit()
 	m_pKernelModule = pPluginManager->FindModule<NFIKernelModule>();
 	m_pLogicClassModule = pPluginManager->FindModule<NFIClassModule>();
 	m_pGameServerNet_ServerModule = pPluginManager->FindModule<NFIGameServerNet_ServerModule>();
-	m_pUUIDModule = pPluginManager->FindModule<NFIUUIDModule>();
 	m_pElementModule = pPluginManager->FindModule<NFIElementModule>();
 	m_pSceneProcessModule = pPluginManager->FindModule<NFISceneProcessModule>();
 
@@ -57,7 +56,7 @@ bool NFCHeroModule::AddHero(const NFGUID& self, const std::string& strID)
 
 	NF_SHARE_PTR<NFIDataList> xRowData = pHeroRecord->GetInitData();
 
-	NFGUID xHeroID = m_pUUIDModule->CreateGUID();
+	NFGUID xHeroID = m_pKernelModule->CreateGUID();
 	xRowData->SetObject(NFrame::Player::PlayerHero::PlayerHero_GUID, xHeroID);
 	xRowData->SetString(NFrame::Player::PlayerHero::PlayerHero_ConfigID, strID.c_str());
 

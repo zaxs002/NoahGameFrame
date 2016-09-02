@@ -94,7 +94,7 @@ int NFCGuildBroadcastModule::OnPropertyCommonEvent( const NFGUID& self, const st
             for (int i = 0; i < valueBroadCaseList.GetCount(); ++i)
             {
                 const NFGUID& xPlayerID = valueBroadCaseList.Object(i);
-                m_pGameServerNet_ServerModule->SendMsgPBToGate(NFMsg::EGMI_ACK_PROPERTY_DOUBLE, xPropertyFloat, xPlayerID);
+                m_pGameServerNet_ServerModule->SendMsgPBToGate(NFMsg::EGMI_ACK_PROPERTY_FLOAT, xPropertyFloat, xPlayerID);
             }
         }
         break;
@@ -377,7 +377,7 @@ int NFCGuildBroadcastModule::OnRecordCommonEvent( const NFGUID& self, const RECO
                     for (int i = 0; i < valueBroadCaseList.GetCount(); ++i)
                     {
                         const NFGUID& xPlayerID = valueBroadCaseList.Object(i);
-                        m_pGameServerNet_ServerModule->SendMsgPBToGate(  NFMsg::EGMI_ACK_RECORD_DOUBLE, xRecordChanged, xPlayerID);
+                        m_pGameServerNet_ServerModule->SendMsgPBToGate(  NFMsg::EGMI_ACK_RECORD_FLOAT, xRecordChanged, xPlayerID);
                     }
 
                 }

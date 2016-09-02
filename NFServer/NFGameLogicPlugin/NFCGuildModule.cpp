@@ -34,7 +34,6 @@ bool NFCGuildModule::Execute()
 bool NFCGuildModule::AfterInit()
 {
     m_pKernelModule = pPluginManager->FindModule<NFIKernelModule>();
-    m_pUUIDModule = pPluginManager->FindModule<NFIUUIDModule>();
     m_pGuildDataModule = pPluginManager->FindModule<NFIGuildDataModule>();
 	m_pGameServerNet_ServerModule = pPluginManager->FindModule<NFIGameServerNet_ServerModule>();
     m_pLogModule = pPluginManager->FindModule<NFILogModule>();

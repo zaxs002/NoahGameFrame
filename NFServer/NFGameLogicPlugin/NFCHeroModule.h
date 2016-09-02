@@ -18,7 +18,6 @@
 #include "NFComm/NFPluginModule/NFIClassModule.h"
 #include "NFComm/NFMessageDefine/NFProtocolDefine.hpp"
 #include "NFComm/NFPluginModule/NFIGameServerNet_ServerModule.h"
-#include "NFComm/NFPluginModule/NFIUUIDModule.h"
 #include "NFComm/NFPluginModule/NFIElementModule.h"
 #include "NFComm/NFPluginModule/NFIGuildEctypeModule.h"
 #include "NFComm/NFPluginModule/NFISceneProcessModule.h"
@@ -61,7 +60,6 @@ protected:
     NFIElementModule* m_pElementModule;
 	NFIKernelModule* m_pKernelModule;
 	NFIGameServerNet_ServerModule* m_pGameServerNet_ServerModule;
-    NFIUUIDModule* m_pUUIDModule;
     NFISceneProcessModule* m_pSceneProcessModule;
 private:
 };

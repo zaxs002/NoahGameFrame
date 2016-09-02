@@ -45,7 +45,6 @@ bool NFCPVPMatchModule::AfterInit()
 {
     m_pKernelModule = pPluginManager->FindModule<NFIKernelModule>();
     m_pLogModule = pPluginManager->FindModule<NFILogModule>();
-    m_pUUIDModule = pPluginManager->FindModule<NFIUUIDModule>();
     m_pPVPMatchRedisModule = pPluginManager->FindModule<NFIPVPMatchRedisModule>();
 	m_pWorldNet_ServerModule = pPluginManager->FindModule<NFIWorldNet_ServerModule>();
 	m_pTeamModule = pPluginManager->FindModule<NFITeamModule>();
@@ -160,7 +159,7 @@ int NFCPVPMatchModule::GetMemberCount(const int nPVPMode)
 
 NFGUID NFCPVPMatchModule::CreateRoom(const NFGUID& self, const int nPVPMode, const int nGrade)
 {
-    NFGUID xRoomID = m_pUUIDModule->CreateGUID();
+    NFGUID xRoomID = m_pKernelModule->CreateGUID();
     if (xRoomID.IsNull())
     {
         return NFGUID();

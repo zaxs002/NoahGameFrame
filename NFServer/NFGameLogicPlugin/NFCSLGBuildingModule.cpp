@@ -20,7 +20,6 @@ bool NFCSLGBuildingModule::AfterInit()
 {
 	m_pKernelModule = pPluginManager->FindModule<NFIKernelModule>();
 	m_pLogModule = pPluginManager->FindModule<NFILogModule>();
-	m_pUUIDModule = pPluginManager->FindModule<NFIUUIDModule>();
 	m_pGameServerNet_ServerModule = pPluginManager->FindModule<NFIGameServerNet_ServerModule>();
 
     //m_pKernelModule->AddClassCallBack(NFrame::BB_Player::ThisName(), this, &NFCSLGBuildingModule::OnClassObjectEvent);
@@ -76,7 +75,7 @@ int NFCSLGBuildingModule::AddBuilding(const NFGUID& self, const std::string& str
 
     NFCDataList xDataList;
     xDataList << strBuilding;
-    xDataList << m_pUUIDModule->CreateGUID();
+    xDataList << m_pKernelModule->CreateGUID();
     xDataList << NFMsg::EBS_IDLE;; // state
     xDataList << int(fX); // x
     xDataList << int(fY); // y

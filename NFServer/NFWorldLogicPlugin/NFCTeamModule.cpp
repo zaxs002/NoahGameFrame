@@ -34,7 +34,6 @@ bool NFCTeamModule::Execute()
 bool NFCTeamModule::AfterInit()
 {
     m_pKernelModule = pPluginManager->FindModule<NFIKernelModule>();
-    m_pUUIDModule = pPluginManager->FindModule<NFIUUIDModule>();
     m_pCommonRedisModule = pPluginManager->FindModule<NFICommonRedisModule>();
     m_pMysqlModule = pPluginManager->FindModule<NFIMysqlModule>();
 	m_pWorldNet_ServerModule = pPluginManager->FindModule<NFIWorldNet_ServerModule>();
@@ -59,7 +58,7 @@ const NFGUID& NFCTeamModule::CreateTeam( const NFGUID& self, const NFGUID& xDefa
     NFGUID xTeam = xDefaultTeamID;
     if (xTeam.IsNull())
     {
-        xTeam = m_pUUIDModule->CreateGUID();
+        xTeam = m_pKernelModule->CreateGUID();
     }
 
     NF_SHARE_PTR<NFIPropertyManager> pPropertyManager = m_pCommonRedisModule->NewPropertyManager(NFrame::Team::ThisName());

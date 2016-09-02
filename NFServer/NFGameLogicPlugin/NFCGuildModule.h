@@ -12,7 +12,6 @@
 #include "NFComm/NFCore/NFMap.h"
 #include "NFComm/NFPluginModule/NFIKernelModule.h"
 #include "NFComm/NFPluginModule/NFIGuildModule.h"
-#include "NFComm/NFPluginModule/NFIUUIDModule.h"
 #include "NFComm/NFPluginModule/NFIGuildDataModule.h"
 #include "NFComm/NFPluginModule/NFILogModule.h"
 #include "NFComm/NFPluginModule/NFIGameServerNet_ServerModule.h"
@@ -62,7 +61,6 @@ protected:
     int OnObjectGuildIDEvent( const NFGUID& self, const std::string& strPropertyName, const NFIDataList::TData& oldVar, const NFIDataList::TData& newVar);
 protected:
     NFIKernelModule* m_pKernelModule;
-    NFIUUIDModule* m_pUUIDModule;
     NFIGuildDataModule* m_pGuildDataModule;
 	NFIGameServerNet_ServerModule* m_pGameServerNet_ServerModule;
     NFIGameServerToWorldModule* m_pGameServerToWorldModule;

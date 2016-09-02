@@ -34,7 +34,6 @@ bool NFCEquipModule::AfterInit()
     m_pSceneProcessModule = pPluginManager->FindModule<NFISceneProcessModule>();
     m_pPropertyModule = pPluginManager->FindModule<NFIPropertyModule>();
     m_pLogModule = pPluginManager->FindModule<NFILogModule>();
-    m_pUUIDModule = pPluginManager->FindModule<NFIUUIDModule>();
 	m_pPackModule = pPluginManager->FindModule<NFIPackModule>();
 	m_pCommonConfigModule = pPluginManager->FindModule<NFICommonConfigModule>();
 	m_pGameServerNet_ServerModule = pPluginManager->FindModule<NFIGameServerNet_ServerModule>();
