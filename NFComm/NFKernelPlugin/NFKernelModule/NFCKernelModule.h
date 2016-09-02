@@ -13,16 +13,17 @@
 #include <fstream>
 #include <string>
 #include <random>
+#include <chrono>
 #include "NFComm/NFCore/NFIObject.h"
 #include "NFComm/NFCore/NFIDataList.h"
 #include "NFComm/NFCore/NFIRecord.h"
 #include "NFComm/NFPluginModule/NFGUID.h"
-#include "NFComm/NFPluginModule/NFIUUIDModule.h"
 #include "NFComm/NFPluginModule/NFILogModule.h"
 #include "NFComm/NFPluginModule/NFIKernelModule.h"
 #include "NFComm/NFPluginModule/NFIClassModule.h"
 #include "NFComm/NFPluginModule/NFIElementModule.h"
 #include "NFComm/NFPluginModule/NFISceneModule.h"
+
 
 class NFCKernelModule
     : public NFIKernelModule,
@@ -95,6 +96,7 @@ public:
     virtual bool SwitchScene(const NFGUID& self, const int nTargetSceneID, const int nTargetGroupID, const float fX, const float fY, const float fZ, const float fOrient, const NFIDataList& arg);
 
     ////////////////////////////////////////////////////////////////
+    virtual NFGUID CreateGUID();
 
     virtual bool CreateScene(const int nSceneID);
     virtual bool DestroyScene(const int nSceneID);
@@ -121,6 +123,8 @@ public:
     virtual bool LogSelfInfo(const NFGUID ident);
 
     //////////////////////////////////////////////////////////////////////////
+
+	virtual NFINT64 GetTime();
 
     virtual bool DoEvent(const NFGUID& self, const std::string& strClassName, CLASS_OBJECT_EVENT eEvent, const NFIDataList& valueList);
     virtual bool DoEvent(const NFGUID& self, const int nEventID, const NFIDataList& valueList);
@@ -168,6 +172,7 @@ private:
 
 private:
     std::vector<float> mvRandom;
+	int nGUIDIndex;
     int mnRandomPos;
 
     NFGUID mnCurExeObject;
@@ -177,7 +182,6 @@ private:
     NFILogModule* m_pLogModule;
     NFIClassModule* m_pClassModule;
     NFIElementModule* m_pElementModule;
-    NFIUUIDModule* m_pUUIDModule;
 };
 
 #endif

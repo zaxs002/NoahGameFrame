@@ -20,6 +20,7 @@ public:
 
     virtual void SetValue(const NFIDataList::TData& TData) = 0;
     virtual void SetValue(const NFIProperty* pProperty) = 0;
+
     virtual bool SetInt(const NFINT64 value) = 0;
     virtual bool SetFloat(const double value) = 0;
     virtual bool SetString(const std::string& value) = 0;
@@ -33,12 +34,14 @@ public:
     virtual const bool GetPrivate() const = 0;
     virtual const bool GetCache() const = 0;
     virtual const bool GetRef() const = 0;
+	virtual const bool GetUpload() const = 0;
 
     virtual void SetSave(bool bSave) = 0;
     virtual void SetPublic(bool bPublic) = 0;
     virtual void SetPrivate(bool bPrivate) = 0;
     virtual void SetCache(bool bCache) = 0;
 	virtual void SetRef(bool bRef) = 0;
+	virtual void SetUpload(bool bUpload) = 0;
 
     virtual NFINT64 GetInt() const = 0;
     virtual double GetFloat() const = 0;

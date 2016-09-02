@@ -17,6 +17,10 @@
 
 NFCKernelModule::NFCKernelModule(NFIPluginManager* p)
 {
+    nGUIDIndex = 0;
+    mnRandomPos = 0;
+    nLastTime = 0;
+
     pPluginManager = p;
 
     nLastTime = pPluginManager->GetNowTime();
@@ -53,7 +57,6 @@ bool NFCKernelModule::Init()
     m_pClassModule = pPluginManager->FindModule<NFIClassModule>();
     m_pElementModule = pPluginManager->FindModule<NFIElementModule>();
     m_pLogModule = pPluginManager->FindModule<NFILogModule>();
-    m_pUUIDModule = pPluginManager->FindModule<NFIUUIDModule>();
 
     return true;
 }
@@ -146,7 +149,7 @@ NF_SHARE_PTR<NFIObject> NFCKernelModule::CreateObject(const NFGUID& self, const 
     //默认为1分组，0则是所有分组都看得见,-1则是容器
     if (ident.IsNull())
     {
-        ident = m_pUUIDModule->CreateGUID();
+        ident = CreateGUID();
     }
 
     if (GetElement(ident))
@@ -181,6 +184,7 @@ NF_SHARE_PTR<NFIObject> NFCKernelModule::CreateObject(const NFGUID& self, const 
             xProperty->SetSave(pStaticConfigPropertyInfo->GetSave());
             xProperty->SetCache(pStaticConfigPropertyInfo->GetCache());
             xProperty->SetRef(pStaticConfigPropertyInfo->GetRef());
+			xProperty->SetUpload(pStaticConfigPropertyInfo->GetUpload());
 
             //通用回调，方便NET同步
             pObject->AddPropertyCallBack(pStaticConfigPropertyInfo->GetKey(), this, &NFCKernelModule::OnPropertyCommonEvent);
@@ -201,6 +205,7 @@ NF_SHARE_PTR<NFIObject> NFCKernelModule::CreateObject(const NFGUID& self, const 
              xRecord->SetPrivate(pConfigRecordInfo->GetPrivate());
              xRecord->SetSave(pConfigRecordInfo->GetSave());
              xRecord->SetCache(pConfigRecordInfo->GetCache());
+			 xRecord->SetUpload(pConfigRecordInfo->GetUpload());
 
 
 
@@ -778,6 +783,32 @@ bool NFCKernelModule::SwitchScene(const NFGUID& self, const int nTargetSceneID, 
     return false;
 }
 
+NFGUID NFCKernelModule::CreateGUID()
+{
+    int64_t value = 0;   
+    uint64_t time = GetTime();
+
+    // 保留后48位时间
+    //value = time << 16;
+    value = time * 1000000;
+
+    // 最后16位是sequenceID
+    //value |= nGUIDIndex++;
+    value += nGUIDIndex++;
+
+    //if (sequence_ == 0x7FFF)
+    if (nGUIDIndex == 999999)
+    {
+        nGUIDIndex = 0;
+    }
+
+    NFGUID xID;
+    xID.nHead64 = pPluginManager->AppID();
+    xID.nData64 = value;
+
+    return xID;
+}
+
 bool NFCKernelModule::CreateScene(const int nSceneID)
 {
     NF_SHARE_PTR<NFCSceneInfo> pSceneInfo = m_pSceneModule->GetElement(nSceneID);
@@ -1224,6 +1255,11 @@ bool NFCKernelModule::LogSelfInfo(const NFGUID ident)
 {
 
     return false;
+}
+
+NFINT64 NFCKernelModule::GetTime()
+{
+	return std::chrono::duration_cast<std::chrono::milliseconds>(std::chrono::system_clock::now().time_since_epoch()).count();
 }
 
 bool NFCKernelModule::AfterInit()
