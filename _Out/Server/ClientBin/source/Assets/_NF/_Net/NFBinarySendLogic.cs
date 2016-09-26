@@ -568,7 +568,7 @@ public class NFBinarySendLogic
 
         MemoryStream stream = new MemoryStream();
         Serializer.Serialize<NFMsg.ObjectPropertyFloat>(stream, xData);
-
+        Debug.Log("send upload Float");
         NFStart.Instance.GetFocusSender().SendMsg(objectID, NFMsg.EGameMsgID.EGMI_ACK_PROPERTY_FLOAT, stream);
     }
 
@@ -584,7 +584,7 @@ public class NFBinarySendLogic
 
         MemoryStream stream = new MemoryStream();
         Serializer.Serialize<NFMsg.ObjectPropertyString>(stream, xData);
-
+        Debug.Log("send upload String");
         NFStart.Instance.GetFocusSender().SendMsg(objectID, NFMsg.EGameMsgID.EGMI_ACK_PROPERTY_STRING, stream);
     }
 
@@ -600,7 +600,7 @@ public class NFBinarySendLogic
 
         MemoryStream stream = new MemoryStream();
         Serializer.Serialize<NFMsg.ObjectPropertyObject>(stream, xData);
-
+        Debug.Log("send upload Object");
         NFStart.Instance.GetFocusSender().SendMsg(objectID, NFMsg.EGameMsgID.EGMI_ACK_PROPERTY_OBJECT, stream);
     }
 
@@ -663,6 +663,7 @@ public class NFBinarySendLogic
 
         MemoryStream stream = new MemoryStream();
         Serializer.Serialize<NFMsg.ObjectRecordAddRow>(stream, xData);
+        Debug.Log("send upload record addRow");
         SendMsg(self, NFMsg.EGameMsgID.EGMI_ACK_ADD_ROW, stream);
     }
 
@@ -675,6 +676,7 @@ public class NFBinarySendLogic
 
         MemoryStream stream = new MemoryStream();
         Serializer.Serialize<NFMsg.ObjectRecordRemove>(stream, xData);
+        Debug.Log("send upload record removeRow");
         SendMsg(self, NFMsg.EGameMsgID.EGMI_ACK_REMOVE_ROW, stream);
     }
 
@@ -689,6 +691,7 @@ public class NFBinarySendLogic
 
         MemoryStream stream = new MemoryStream();
         Serializer.Serialize<NFMsg.ObjectRecordSwap>(stream, xData);
+        Debug.Log("send upload record swapRow");
         SendMsg(self, NFMsg.EGameMsgID.EGMI_ACK_SWAP_ROW, stream);
     }
 
@@ -699,12 +702,14 @@ public class NFBinarySendLogic
         xData.record_name = System.Text.Encoding.Default.GetBytes(strRecordName);
 
         NFMsg.RecordInt xRecordInt = new NFMsg.RecordInt();
+        xData.property_list.Add(xRecordInt);
         xRecordInt.row = nRow;
         xRecordInt.col = nCol;
         xRecordInt.data = newVar.IntVal();
 
         MemoryStream stream = new MemoryStream();
         Serializer.Serialize<NFMsg.ObjectRecordInt>(stream, xData);
+        Debug.Log("send upload record int");
         SendMsg(self, NFMsg.EGameMsgID.EGMI_ACK_RECORD_INT, stream);
     }
 
@@ -715,12 +720,14 @@ public class NFBinarySendLogic
         xData.record_name = System.Text.Encoding.Default.GetBytes(strRecordName);
 
         NFMsg.RecordFloat xRecordFloat = new NFMsg.RecordFloat();
+        xData.property_list.Add(xRecordFloat);
         xRecordFloat.row = nRow;
         xRecordFloat.col = nCol;
         xRecordFloat.data = (float)newVar.FloatVal();
 
         MemoryStream stream = new MemoryStream();
         Serializer.Serialize<NFMsg.ObjectRecordFloat>(stream, xData);
+        Debug.Log("send upload record float");
         SendMsg(self, NFMsg.EGameMsgID.EGMI_ACK_RECORD_FLOAT, stream);
     }
 
@@ -731,12 +738,14 @@ public class NFBinarySendLogic
         xData.record_name = System.Text.Encoding.Default.GetBytes(strRecordName);
 
         NFMsg.RecordString xRecordString = new NFMsg.RecordString();
+        xData.property_list.Add(xRecordString);
         xRecordString.row = nRow;
         xRecordString.col = nCol;
         xRecordString.data = System.Text.Encoding.Default.GetBytes(newVar.StringVal());
 
         MemoryStream stream = new MemoryStream();
         Serializer.Serialize<NFMsg.ObjectRecordString>(stream, xData);
+        Debug.Log("send upload record string");
         SendMsg(self, NFMsg.EGameMsgID.EGMI_ACK_RECORD_STRING, stream);
     }
 
@@ -747,12 +756,14 @@ public class NFBinarySendLogic
         xData.record_name = System.Text.Encoding.Default.GetBytes(strRecordName);
 
         NFMsg.RecordObject xRecordObject = new NFMsg.RecordObject();
+        xData.property_list.Add(xRecordObject);
         xRecordObject.row = nRow;
         xRecordObject.col = nCol;
         xRecordObject.data = NFBinarySendLogic.NFToPB(newVar.ObjectVal());
 
         MemoryStream stream = new MemoryStream();
         Serializer.Serialize<NFMsg.ObjectRecordObject>(stream, xData);
+        Debug.Log("send upload record object");
         SendMsg(self, NFMsg.EGameMsgID.EGMI_ACK_RECORD_OBJECT, stream);
     }
 }

@@ -7,8 +7,8 @@
 // -------------------------------------------------------------------------
 
 #include "NFCGameServerNet_ServerModule.h"
-#include "NFComm/NFPluginModule/NFIModule.h"
 #include "NFComm/NFMessageDefine/NFProtocolDefine.hpp"
+#include "NFComm/NFPluginModule/NFIEventModule.h"
 
 bool NFCGameServerNet_ServerModule::Init()
 {
@@ -23,6 +23,7 @@ bool NFCGameServerNet_ServerModule::AfterInit()
 	m_pSceneProcessModule = pPluginManager->FindModule<NFISceneProcessModule>();
 	m_pElementModule = pPluginManager->FindModule<NFIElementModule>();
 	m_pLogModule = pPluginManager->FindModule<NFILogModule>();
+	m_pEventModule = pPluginManager->FindModule<NFIEventModule>();
 	m_pGameServerToWorldModule = pPluginManager->FindModule<NFIGameServerToWorldModule>();
 
 	m_pNetModule->AddReceiveCallBack(NFMsg::EGMI_PTWG_PROXY_REFRESH, this, &NFCGameServerNet_ServerModule::OnRefreshProxyServerInfoProcess);
@@ -237,7 +238,7 @@ void NFCGameServerNet_ServerModule::OnClienEnterGameProcess(const int nSockIndex
 	varEntry << NFINT64(0);
 	varEntry << nSceneID;
 	varEntry << -1;
-	m_pKernelModule->DoEvent(pObject->Self(), NFED_ON_CLIENT_ENTER_SCENE, varEntry);
+	m_pEventModule->DoEvent(pObject->Self(), NFED_ON_CLIENT_ENTER_SCENE, varEntry);
 }
 
 void NFCGameServerNet_ServerModule::OnClienLeaveGameProcess(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen)
@@ -794,7 +795,7 @@ int NFCGameServerNet_ServerModule::OnRecordCommonEvent(const NFGUID& self, const
 
 	switch (nOpType)
 	{
-	case NFIRecord::RecordOptype::Add:
+	case RECORD_EVENT_DATA::Add:
 	{
 		NFMsg::ObjectRecordAddRow xAddRecordRow;
 		NFMsg::Ident* pIdent = xAddRecordRow.mutable_player_id();
@@ -881,7 +882,7 @@ int NFCGameServerNet_ServerModule::OnRecordCommonEvent(const NFGUID& self, const
 		}
 	}
 	break;
-	case NFIRecord::RecordOptype::Del:
+	case RECORD_EVENT_DATA::Del:
 	{
 		NFMsg::ObjectRecordRemove xReoveRecordRow;
 
@@ -899,7 +900,7 @@ int NFCGameServerNet_ServerModule::OnRecordCommonEvent(const NFGUID& self, const
 		}
 	}
 	break;
-	case NFIRecord::RecordOptype::Swap:
+	case RECORD_EVENT_DATA::Swap:
 	{
 		//其实是2个row交换
 		NFMsg::ObjectRecordSwap xSwapRecord;
@@ -918,7 +919,7 @@ int NFCGameServerNet_ServerModule::OnRecordCommonEvent(const NFGUID& self, const
 		}
 	}
 	break;
-	case NFIRecord::RecordOptype::Update:
+	case RECORD_EVENT_DATA::Update:
 	{
 		switch (oldVar.GetType())
 		{
@@ -1007,10 +1008,10 @@ int NFCGameServerNet_ServerModule::OnRecordCommonEvent(const NFGUID& self, const
 		}
 	}
 	break;
-	case NFIRecord::RecordOptype::Create:
+	case RECORD_EVENT_DATA::Create:
 		return 0;
 		break;
-	case NFIRecord::RecordOptype::Cleared:
+	case RECORD_EVENT_DATA::Cleared:
 	{
 		//             NFMsg::ObjectRecordObject xRecordChanged;
 		//             xRecordChanged.set_player_id( self.nData64 );
@@ -1146,7 +1147,7 @@ int NFCGameServerNet_ServerModule::OnGroupEvent(const NFGUID& self, const std::s
 			OnObjectListLeave(NFCDataList() << self, valueAllOldObjectList);
 		}
 
-		m_pKernelModule->DoEvent(self, NFED_ON_CLIENT_LEAVE_SCENE, NFCDataList() << nOldGroupID);
+		m_pEventModule->DoEvent(self, NFED_ON_CLIENT_LEAVE_SCENE, NFCDataList() << nOldGroupID);
 	}
 
 	//再广播给别人自己出现(层升或者跃层)
@@ -1421,13 +1422,13 @@ int NFCGameServerNet_ServerModule::OnObjectClassEvent(const NFGUID& self, const 
 	}
 	else if (CLASS_OBJECT_EVENT::COE_CREATE_FINISH == eClassEvent)
 	{
-		m_pKernelModule->AddEventCallBack(self, NFED_ON_OBJECT_ENTER_SCENE_BEFORE, this, &NFCGameServerNet_ServerModule::OnSwapSceneResultEvent);
+		m_pEventModule->AddEventCallBack(self, NFED_ON_OBJECT_ENTER_SCENE_BEFORE, this, &NFCGameServerNet_ServerModule::OnSwapSceneResultEvent);
 	}
 
 	return 0;
 }
 
-int NFCGameServerNet_ServerModule::OnSwapSceneResultEvent(const NFGUID& self, const int nEventID, const NFIDataList& var)
+int NFCGameServerNet_ServerModule::OnSwapSceneResultEvent(const NFGUID& self, const NFEventDefine nEventID, const NFIDataList& var)
 {
 	if (var.GetCount() != 7 ||
 		!var.TypeEx(TDATA_TYPE::TDATA_OBJECT, TDATA_TYPE::TDATA_INT, TDATA_TYPE::TDATA_INT,
@@ -1523,7 +1524,7 @@ void NFCGameServerNet_ServerModule::OnClienSwapSceneProcess(const int nSockIndex
 	varEntry << 0;
 	varEntry << xMsg.scene_id();
 	varEntry << -1;
-	m_pKernelModule->DoEvent(pObject->Self(), NFED_ON_CLIENT_ENTER_SCENE, varEntry);
+	m_pEventModule->DoEvent(pObject->Self(), NFED_ON_CLIENT_ENTER_SCENE, varEntry);
 }
 
 void NFCGameServerNet_ServerModule::OnClientPropertyIntProcess(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen)

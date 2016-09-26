@@ -14,9 +14,6 @@
     <ClInclude Include="NFCRecord.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="NFDefine.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="NFIObject.h">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -50,12 +47,6 @@
     <ClInclude Include="NFSingleton.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="NFCHeartBeatManager.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="NFIHeartBeatManager.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="NFCComponentManager.h">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -63,9 +54,6 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="NFIComponentManager.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="NFTimer.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="NFQueue.h">
@@ -92,10 +80,10 @@
     <ClInclude Include="NFCAddConsistentHash.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="NFCEventManager.h">
+    <ClInclude Include="NFCalendar.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="NFIEventManager.h">
+    <ClInclude Include="NFTime.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
@@ -112,9 +100,6 @@
     <ClCompile Include="NFCProperty.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="NFCHeartBeatManager.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="NFCComponentManager.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -127,10 +112,10 @@
     <ClCompile Include="NFCMemManger.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="NFCEventManager.cpp">
-      <Filter>Header Files</Filter>
+    <ClCompile Include="NFCalendar.cpp">
+      <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="NFTimer.cpp">
+    <ClCompile Include="NFTime.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

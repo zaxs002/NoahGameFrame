@@ -14,29 +14,15 @@
 #include <functional>
 #include "NFIModule.h"
 #include "NFComm/NFCore/NFIObject.h"
+#include "NFComm/NFCore/NFCDataList.h"
 #include "NFComm/NFPluginModule/NFGUID.h"
+#include "NFComm/NFPluginModule/NFIClassModule.h"
 
 class NFIKernelModule
     : public NFIModule
 {
 
 public:
-
-    template<typename BaseType>
-    bool AddHeartBeat(const NFGUID self, const std::string& strHeartBeatName, BaseType* pBase, int (BaseType::*handler)(const NFGUID&, const std::string&, const float, const int), const float fTime, const int nCount)
-    {
-        NF_SHARE_PTR<NFIObject> pObject = GetObject(self);
-        if (pObject.get())
-        {
-            return pObject->AddHeartBeat(strHeartBeatName, pBase, handler, fTime, nCount);
-        }
-
-        return false;
-    }
-
-    virtual bool FindHeartBeat(const NFGUID& self, const std::string& strHeartBeatName) = 0;
-
-    virtual bool RemoveHeartBeat(const NFGUID& self, const std::string& strHeartBeatName) = 0;
 
     template<typename BaseType>
     bool AddRecordCallBack(const NFGUID& self, const std::string& strRecordName, BaseType* pBase, int (BaseType::*handler)(const NFGUID&, const RECORD_EVENT_DATA&, const NFIDataList::TData&, const NFIDataList::TData&))
@@ -64,14 +50,6 @@ public:
 
     ////////////////event//////////////////////////////////////////////////////////
     template<typename BaseType>
-    bool AddEventCallBack(const NFGUID& self, const int nEventID, BaseType* pBase, int (BaseType::*handler)(const NFGUID&, const int, const NFIDataList&))
-    {
-        EVENT_PROCESS_FUNCTOR functor = std::bind(handler, pBase, std::placeholders::_1, std::placeholders::_2, std::placeholders::_3);
-        EVENT_PROCESS_FUNCTOR_PTR functorPtr(new EVENT_PROCESS_FUNCTOR(functor));
-        return AddEventCallBack(self, nEventID, functorPtr);
-    }
-
-    template<typename BaseType>
     bool AddClassCallBack(const std::string& strClassName, BaseType* pBase, int (BaseType::*handler)(const NFGUID&, const std::string&, const CLASS_OBJECT_EVENT, const NFIDataList&))
     {
         CLASS_EVENT_FUNCTOR functor = std::bind(handler, pBase, std::placeholders::_1, std::placeholders::_2, std::placeholders::_3, std::placeholders::_4);
@@ -80,7 +58,6 @@ public:
     }
 
     virtual bool DoEvent(const NFGUID& self, const std::string& strClassName, CLASS_OBJECT_EVENT eEvent, const NFIDataList& valueList) = 0;
-    virtual bool DoEvent(const NFGUID& self, const int nEventID, const NFIDataList& valueList) = 0;
 
     //////////////////////////////////////////////////////////////////////////
     //ֻ������ģ��ע�ᣬ�ص�����ͬ���������¼�,���е������󶼻��ص�
@@ -113,9 +90,12 @@ public:
 
     /////////////////////////////////////////////////////////////////
 
-
     virtual bool IsContainer(const NFGUID& self) = 0;
     virtual bool ExistContainer(const int nContainerIndex) = 0;
+
+	virtual bool ExistObject(const NFGUID& ident) = 0;
+	virtual bool ExistObject(const NFGUID& ident, const int nContainerIndex) = 0;
+	virtual bool ExistObject(const NFGUID& ident, const int nContainerIndex, const int nGroupID) = 0;
 
     virtual NF_SHARE_PTR<NFIObject> GetObject(const NFGUID& ident) = 0;
     virtual NF_SHARE_PTR<NFIObject> CreateObject(const NFGUID& self, const int nSceneID, const int nGroupID, const std::string& strClassName, const std::string& strConfigIndex, const NFIDataList& arg) = 0;
@@ -185,7 +165,6 @@ public:
 	virtual NFINT64 GetTime() = 0;
 
 protected:
-    virtual bool AddEventCallBack(const NFGUID& self, const int nEventID, const EVENT_PROCESS_FUNCTOR_PTR& cb) = 0;
     virtual bool AddClassCallBack(const std::string& strClassName, const CLASS_EVENT_FUNCTOR_PTR& cb) = 0;
 
 

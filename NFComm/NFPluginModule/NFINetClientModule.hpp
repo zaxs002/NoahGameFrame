@@ -290,9 +290,33 @@ public:
 
 	
 protected:
+
+	void InitCallBacks(NF_SHARE_PTR<ConnectData> pServerData)
+	{
+		//add msg callback
+		std::map<int, NET_RECEIVE_FUNCTOR_PTR>::iterator itReciveCB = mxReceiveCallBack.begin();
+		for (; mxReceiveCallBack.end() != itReciveCB; ++itReciveCB)
+		{
+			pServerData->mxNetModule->AddReceiveCallBack(itReciveCB->first, itReciveCB->second);
+		}
+
+		//add event callback
+		std::list<NET_EVENT_FUNCTOR_PTR>::iterator itEventCB = mxEventCallBack.begin();
+		for (; mxEventCallBack.end() != itEventCB; ++itEventCB)
+		{
+			pServerData->mxNetModule->AddEventCallBack(*itEventCB);
+		}
+
+		std::list<NET_RECEIVE_FUNCTOR_PTR>::iterator itCB = mxCallBackList.begin();
+		for (; mxCallBackList.end() != itCB; ++itCB)
+		{
+			pServerData->mxNetModule->AddReceiveCallBack(*itCB);
+		}
+	}
+
 	void ProcessExecute()
 	{
-		ConnectData* pServerData = mxServerMap.FirstNude();
+		NF_SHARE_PTR<ConnectData> pServerData = mxServerMap.First();
 		while (pServerData)
 		{
 			switch (pServerData->eState)
@@ -340,17 +364,19 @@ protected:
 				pServerData->eState = ConnectDataState::CONNECTING;
 				pServerData->mxNetModule = NF_SHARE_PTR<NFINetModule>(NF_NEW NFINetModule(pPluginManager));
 				pServerData->mxNetModule->Initialization(pServerData->strIP.c_str(), pServerData->nPort);
+
+				InitCallBacks(pServerData);
 			}
 			break;
 			default:
 				break;
 			}
 
-			pServerData = mxServerMap.NextNude();
+			pServerData = mxServerMap.Next();
 		}
 	}
 
-	void KeepReport(ConnectData* pServerData){};
+	void KeepReport(NF_SHARE_PTR<ConnectData> pServerData){};
 	void LogServerInfo(const std::string& strServerInfo){};
 
 private:
@@ -372,7 +398,7 @@ private:
 		LogServerInfo("This is a client, end to print Server Info----------------------------------");
 	};
 
-	void KeepState(ConnectData* pServerData)
+	void KeepState(NF_SHARE_PTR<ConnectData> pServerData)
 	{
 		if (pServerData->mnLastActionTime + 10 > GetPluginManager()->GetNowTime())
 		{
@@ -445,25 +471,7 @@ private:
 				xServerData->mxNetModule = NF_SHARE_PTR<NFINetModule>(NF_NEW NFINetModule(pPluginManager));
 				xServerData->mxNetModule->Initialization(xServerData->strIP.c_str(), xServerData->nPort);
 
-				//add msg callback
-				std::map<int, NET_RECEIVE_FUNCTOR_PTR>::iterator itReciveCB = mxReceiveCallBack.begin();
-				for ( ; mxReceiveCallBack.end() != itReciveCB; ++itReciveCB)
-				{
-					xServerData->mxNetModule->AddReceiveCallBack(itReciveCB->first, itReciveCB->second);
-				}
-
-				//add event callback
-				std::list<NET_EVENT_FUNCTOR_PTR>::iterator itEventCB = mxEventCallBack.begin();
-				for ( ; mxEventCallBack.end() != itEventCB; ++itEventCB)
-				{
-					xServerData->mxNetModule->AddEventCallBack(*itEventCB);
-				}
-
-				std::list<NET_RECEIVE_FUNCTOR_PTR>::iterator itCB = mxCallBackList.begin();
-				for (; mxCallBackList.end() != itCB; ++itCB)
-				{
-					xServerData->mxNetModule->AddReceiveCallBack(*itCB);
-				}
+				InitCallBacks(xServerData);
 
 				mxServerMap.AddElement(xInfo.nGameID, xServerData);
             }

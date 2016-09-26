@@ -27,6 +27,7 @@
 #include "NFComm/NFPluginModule/NFIPropertyModule.h"
 #include "NFComm/NFPluginModule/NFILogModule.h"
 #include "NFComm/NFPluginModule/NFIPluginManager.h"
+#include "NFComm/NFPluginModule/NFIEventModule.h"
 #include "NFComm/NFMessageDefine/NFProtocolDefine.hpp"
 #include "NFComm/NFPluginModule/NFIGameServerNet_ServerModule.h"
 
@@ -61,8 +62,8 @@ protected:
 
     int OnObjectClassEvent(const NFGUID& self, const std::string& strClassName, const CLASS_OBJECT_EVENT eClassEvent, const NFIDataList& var);
 
-    int OnEnterSceneEvent(const NFGUID& object, const int nEventID, const NFIDataList& var);
-    int OnLeaveSceneEvent(const NFGUID& object, const int nEventID, const NFIDataList& var);
+    int OnEnterSceneEvent(const NFGUID& object, const NFEventDefine nEventID, const NFIDataList& var);
+    int OnLeaveSceneEvent(const NFGUID& object, const NFEventDefine nEventID, const NFIDataList& var);
 
 protected:
     void OnClienSwapSceneProcess(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
@@ -73,6 +74,7 @@ private:
     NFIClassModule* m_pClassModule;
     NFIKernelModule* m_pKernelModule;
     NFILogModule* m_pLogModule;
+	NFIEventModule* m_pEventModule;
     NFIGameServerNet_ServerModule* m_pGameServerNet_ServerModule;
     //////////////////////////////////////////////////////////////////////////
     struct SceneSeedResource
