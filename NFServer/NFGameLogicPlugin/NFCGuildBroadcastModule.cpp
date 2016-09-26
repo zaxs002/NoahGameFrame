@@ -171,7 +171,7 @@ int NFCGuildBroadcastModule::OnRecordCommonEvent( const NFGUID& self, const RECO
 
     switch ( nOpType )
     {
-    case NFIRecord::RecordOptype::Add:
+    case RECORD_EVENT_DATA::Add:
         {
             NFMsg::ObjectRecordAddRow xAddRecordRow;
             NFMsg::Ident* pIdent = xAddRecordRow.mutable_player_id();
@@ -257,7 +257,7 @@ int NFCGuildBroadcastModule::OnRecordCommonEvent( const NFGUID& self, const RECO
             }
         }
         break;
-    case NFIRecord::RecordOptype::Del:
+    case RECORD_EVENT_DATA::Del:
         {
             NFMsg::ObjectRecordRemove xReoveRecordRow;
 
@@ -294,7 +294,7 @@ int NFCGuildBroadcastModule::OnRecordCommonEvent( const NFGUID& self, const RECO
             }
         }
         break;
-    case NFIRecord::RecordOptype::Swap:
+    case RECORD_EVENT_DATA::Swap:
         {
             //其实是2个row交换
             NFMsg::ObjectRecordSwap xSwapRecord;
@@ -312,7 +312,7 @@ int NFCGuildBroadcastModule::OnRecordCommonEvent( const NFGUID& self, const RECO
             }
         }
         break;
-    case NFIRecord::RecordOptype::Update:
+    case RECORD_EVENT_DATA::Update:
         {
             //装备的过程中是不能更新的
             const int nCol = xEventData.nCol;
@@ -426,10 +426,10 @@ int NFCGuildBroadcastModule::OnRecordCommonEvent( const NFGUID& self, const RECO
             }
         }
         break;
-    case NFIRecord::RecordOptype::Create:
+    case RECORD_EVENT_DATA::Create:
         return 0;
         break;
-    case NFIRecord::RecordOptype::Cleared:
+    case RECORD_EVENT_DATA::Cleared:
         {
         }
         break;

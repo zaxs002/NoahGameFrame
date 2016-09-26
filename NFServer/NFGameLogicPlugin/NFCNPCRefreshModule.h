@@ -1,5 +1,5 @@
 // -------------------------------------------------------------------------
-//    @FileName         :   NFCNPCRefreshModule.h
+//    @FileName				:   NFCNPCRefreshModule.h
 //    @Author               :    LvSheng.Huang
 //    @Date                 :    2013-10-17
 //    @Module               :    NFCNPCRefreshModule
@@ -20,6 +20,8 @@
 #include "NFComm/NFPluginModule/NFILevelModule.h"
 #include "NFComm/NFPluginModule/NFICommonConfigModule.h"
 #include "NFComm/NFPluginModule/NFIHeroPropertyModule.h"
+#include "NFComm/NFPluginModule/NFIEventModule.h"
+#include "NFComm/NFPluginModule/NFIScheduleModule.h"
 
 class NFCNPCRefreshModule
     : public NFINPCRefreshModule
@@ -44,7 +46,8 @@ protected:
 
     int OnDeadDestroyHeart( const NFGUID& self, const std::string& strHeartBeat, const float fTime, const int nCount);
 private:
-
+	NFIEventModule* m_pEventModule;
+	NFIScheduleModule* m_pScheduleModule;
     NFIElementModule* m_pElementModule;
     NFIKernelModule* m_pKernelModule;
     NFISceneProcessModule* m_pSceneProcessModule;

@@ -77,18 +77,18 @@ int NFCHeroPropertyModule::OnObjectHeroRecordEvent(const NFGUID& self, const REC
 
 	switch (xEventData.nOpType)
 	{
-	case NFIRecord::RecordOptype::Add:
+	case RECORD_EVENT_DATA::Add:
 	{
 		const NFGUID& xHeroGUID = pHeroRecord->GetObject(xEventData.nRow, NFrame::Player::PlayerHero::PlayerHero_GUID);
 		OnHeroPropertyUpdate(self, xHeroGUID);
 	}
 	break;
-	case NFIRecord::RecordOptype::Del:
+	case RECORD_EVENT_DATA::Del:
 	{
 
 	}
 	break;
-	case NFIRecord::RecordOptype::Update:
+	case RECORD_EVENT_DATA::Update:
 	{
 		switch (xEventData.nCol)
 		{

@@ -9,7 +9,6 @@
 #include <assert.h>
 #include "NFCLuaScriptModule.h"
 #include "NFLuaScriptPlugin.h"
-#include "NFComm/NFCore/NFTimer.h"
 #include "NFComm/NFPluginModule/NFIKernelModule.h"
 
 #define TRY_RUN_GLOBAL_SCRIPT_FUN0(strFuncName)   try {LuaIntf::LuaRef func(l, strFuncName);  func.call<LuaIntf::LuaRef>(); }   catch (LuaIntf::LuaException& e) { cout << e.what() << endl; }
@@ -26,8 +25,10 @@ bool NFCLuaScriptModule::Init()
 
     m_pKernelModule = pPluginManager->FindModule<NFIKernelModule>();
     m_pLogicClassModule = pPluginManager->FindModule<NFIClassModule>();
-    m_pElementModule = pPluginManager->FindModule<NFIElementModule>();
-
+	m_pElementModule = pPluginManager->FindModule<NFIElementModule>();
+	m_pEventModule = pPluginManager->FindModule<NFIEventModule>();
+	m_pScheduleModule = pPluginManager->FindModule<NFIScheduleModule>();
+	
 	Regisger();
 
     TRY_ADD_PACKAGE_PATH(pPluginManager->GetConfigPath() + "NFDataCfg/ScriptModule"); //Add Search Path to Lua
@@ -151,7 +152,7 @@ bool NFCLuaScriptModule::AddEventCallBack(const NFGUID& self, const int nEventID
 {
     if (AddLuaFuncToMap(m_luaEventCallBackFuncMap, self, (int)nEventID, luaFunc))
     {
-        m_pKernelModule->AddEventCallBack(self, nEventID, this, &NFCLuaScriptModule::OnLuaEventCB);
+		m_pEventModule->AddEventCallBack(self, nEventID, this, &NFCLuaScriptModule::OnLuaEventCB);
     }
     return true;
 }
@@ -165,7 +166,7 @@ bool NFCLuaScriptModule::AddHeartBeat(const NFGUID& self, std::string& strHeartB
 {
     if (AddLuaFuncToMap(m_luaHeartBeatCallBackFuncMap, self, strHeartBeatName, luaFunc))
     {
-        m_pKernelModule->AddHeartBeat(self, strHeartBeatName, this, &NFCLuaScriptModule::OnLuaHeartBeatCB, fTime, nCount);
+		m_pScheduleModule->AddSchedule(self, strHeartBeatName, this, &NFCLuaScriptModule::OnLuaHeartBeatCB, fTime, nCount);
     }
     return true;
 }

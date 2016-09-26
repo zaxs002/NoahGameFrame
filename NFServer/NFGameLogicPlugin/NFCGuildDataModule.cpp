@@ -35,7 +35,8 @@ bool NFCGuildDataModule::AfterInit()
     m_pMysqlModule = pPluginManager->FindModule<NFIMysqlModule>();
     m_pPlayerMysqlModule = pPluginManager->FindModule<NFIPlayerMysqlModule>();
     m_pCommonConfigModule = pPluginManager->FindModule<NFICommonConfigModule>();
-
+	m_pScheduleModule = pPluginManager->FindModule<NFIScheduleModule>();
+	
     m_pPlayerMysqlModule->RegisterAutoSave(NFrame::Guild::ThisName());
     m_pKernelModule->AddClassCallBack(NFrame::Guild::ThisName(), this, &NFCGuildDataModule::OnGuildClassEvent);
 
@@ -88,7 +89,7 @@ int NFCGuildDataModule::OnGuildClassEvent( const NFGUID& self, const std::string
     {
         if ( CLASS_OBJECT_EVENT::COE_CREATE_HASDATA == eClassEvent )
         {
-            m_pKernelModule->AddHeartBeat(self, "OnSaveGuildheartEvent", this, &NFCGuildDataModule::OnSaveGuildheartEvent, 30, 99999);
+			m_pScheduleModule->AddSchedule(self, "OnSaveGuildheartEvent", this, &NFCGuildDataModule::OnSaveGuildheartEvent, 30, 99999);
         }
     }
 

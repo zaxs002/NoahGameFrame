@@ -7,7 +7,6 @@
 // -------------------------------------------------------------------------
 
 #include "NFCMapModule.h"
-#include "NFComm/NFCore/NFTimer.h"
 #include "NFComm/NFMessageDefine/NFProtocolDefine.hpp"
 
 bool NFCMapModule::Init()

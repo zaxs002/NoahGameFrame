@@ -17,6 +17,7 @@
 #include "NFComm/NFPluginModule/NFIPlayerMysqlModule.h"
 #include "NFComm/NFPluginModule/NFICommonConfigModule.h"
 #include "NFComm/NFPluginModule/NFIMysqlModule.h"
+#include "NFComm/NFPluginModule/NFIScheduleModule.h"
 
 class NFCGuildDataModule
     : public NFIGuildDataModule
@@ -53,6 +54,7 @@ protected:
     void HandleLoadGuildSuccess(const NFGUID& xGuild, const int nResult, const std::string& strUseData);
 
 protected:
+	NFIScheduleModule* m_pScheduleModule;
     NFIKernelModule* m_pKernelModule;
     NFIMysqlModule* m_pMysqlModule;    
 	NFIPlayerMysqlModule* m_pPlayerMysqlModule;

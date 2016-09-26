@@ -9,6 +9,7 @@
 #ifndef NFC_SKILL_MODULE_H
 #define NFC_SKILL_MODULE_H
 
+#include "NFComm/NFMessageDefine/NFProtocolDefine.hpp"
 #include "NFComm/NFPluginModule/NFIKernelModule.h"
 #include "NFComm/NFPluginModule/NFIGameLogicModule.h"
 #include "NFComm/NFPluginModule/NFISkillModule.h"
@@ -18,7 +19,7 @@
 #include "NFComm/NFPluginModule/NFIPropertyModule.h"
 #include "NFComm/NFPluginModule/NFISceneProcessModule.h"
 #include "NFComm/NFPluginModule/NFIPluginManager.h"
-#include "NFComm/NFMessageDefine/NFProtocolDefine.hpp"
+#include "NFComm/NFPluginModule/NFIEventModule.h"
 #include "NFComm/NFPluginModule/NFIGameServerNet_ServerModule.h"
 
 class NFCSkillModule
@@ -53,8 +54,8 @@ protected:
 
     int OnClassObjectEvent( const NFGUID& self, const std::string& strClassName, const CLASS_OBJECT_EVENT eClassEvent, const NFIDataList& var );
 
-	int OnRequireUseSkillEvent( const NFGUID& self, const int nEventID, const NFIDataList& var );
-	int OnRequireUseSkillPosEvent( const NFGUID& self, const int nEventID, const NFIDataList& var );
+	int OnRequireUseSkillEvent( const NFGUID& self, const NFEventDefine nEventID, const NFIDataList& var );
+	int OnRequireUseSkillPosEvent( const NFGUID& self, const NFEventDefine nEventID, const NFIDataList& var );
 
 protected:
 	void OnClienUseSkill(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
@@ -64,6 +65,7 @@ private:
     NFIPropertyModule* m_pPropertyModule;
     NFIKernelModule* m_pKernelModule;
     NFILogModule* m_pLogModule;
+	NFIEventModule* m_pEventModule;
     //NFISkillConsumeManagerModule* m_pSkillConsumeManagerModule;
     NFIElementModule* m_pElementModule;
     NFISceneProcessModule* m_pSceneProcessModule;

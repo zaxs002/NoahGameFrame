@@ -16,6 +16,8 @@
 #include "NFComm/NFPluginModule/NFIClassModule.h"
 #include "NFComm/NFPluginModule/NFILuaScriptModule.h"
 #include "NFComm/NFPluginModule/NFIScriptModule.h"
+#include "NFComm/NFPluginModule/NFIEventModule.h"
+#include "NFComm/NFPluginModule/NFIScheduleModule.h"
 
 class NFCLuaScriptModule
     : public NFILuaScriptModule
@@ -61,6 +63,8 @@ protected:
     NFIElementModule* m_pElementModule;
     NFIKernelModule* m_pKernelModule;
     NFIClassModule* m_pLogicClassModule;
+	NFIEventModule* m_pEventModule;
+	NFIScheduleModule* m_pScheduleModule;
 
 protected:
     LuaIntf::LuaContext l;

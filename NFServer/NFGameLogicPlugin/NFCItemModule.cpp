@@ -39,7 +39,8 @@ bool NFCItemModule::AfterInit()
 	m_pHeroModule = pPluginManager->FindModule<NFIHeroModule>();
 	m_pCommonConfigModule = pPluginManager->FindModule<NFICommonConfigModule>();
 	m_pGameServerNet_ServerModule = pPluginManager->FindModule<NFIGameServerNet_ServerModule>();
-
+	m_pEventModule = pPluginManager->FindModule<NFIEventModule>();
+	
 	m_pKernelModule->AddClassCallBack(NFrame::Player::ThisName(), this, &NFCItemModule::OnClassObjectEvent);
 	CheckConfig();
 
@@ -59,7 +60,7 @@ int NFCItemModule::OnClassObjectEvent(const NFGUID& self, const std::string& str
 	}
 	else if (CLASS_OBJECT_EVENT::COE_CREATE_NODATA == eClassEvent)
 	{
-		m_pKernelModule->AddEventCallBack(self, NFED_ON_CLIENT_REQUIRE_USE_ITEM_POS, this, &NFCItemModule::OnRequireUseItemPosEvent);
+		m_pEventModule->AddEventCallBack(self, NFED_ON_CLIENT_REQUIRE_USE_ITEM_POS, this, &NFCItemModule::OnRequireUseItemPosEvent);
 	}
 
 	return 0;

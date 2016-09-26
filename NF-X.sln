@@ -92,6 +92,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "NFTool", "NFTool", "{CEA9F3
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "NFFileProcess", "NFTools\NFFileProcess\NFFileProcess.vcxproj", "{2A24AA66-5EBC-4ECC-8021-7D9237868B33}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "NFTutorial", "NFTutorial", "{E0222684-609E-4445-A9DF-812C2E2AB29C}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|x64 = Debug|x64

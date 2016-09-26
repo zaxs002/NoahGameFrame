@@ -34,12 +34,13 @@ bool NFCSkillModule::AfterInit()
     //m_pSkillConsumeManagerModule = pPluginManager->FindModule<NFISkillConsumeManagerModule>();
     m_pElementModule = pPluginManager->FindModule<NFIElementModule>();
     m_pLogModule = pPluginManager->FindModule<NFILogModule>();
+	m_pEventModule = pPluginManager->FindModule<NFIEventModule>();
     m_pPropertyModule = pPluginManager->FindModule<NFIPropertyModule>();
     m_pSceneProcessModule = pPluginManager->FindModule<NFISceneProcessModule>();
 	m_pGameServerNet_ServerModule = pPluginManager->FindModule<NFIGameServerNet_ServerModule>();
 
-    m_pKernelModule->AddEventCallBack( NFGUID(), NFED_ON_CLIENT_REQUIRE_USE_SKILL, this, &NFCSkillModule::OnRequireUseSkillEvent );
-    m_pKernelModule->AddEventCallBack( NFGUID(), NFED_ON_CLIENT_REQUIRE_USE_SKILL_POS, this, &NFCSkillModule::OnRequireUseSkillPosEvent );
+	m_pEventModule->AddEventCallBack( NFGUID(), NFED_ON_CLIENT_REQUIRE_USE_SKILL, this, &NFCSkillModule::OnRequireUseSkillEvent );
+	m_pEventModule->AddEventCallBack( NFGUID(), NFED_ON_CLIENT_REQUIRE_USE_SKILL_POS, this, &NFCSkillModule::OnRequireUseSkillPosEvent );
 
     m_pKernelModule->AddClassCallBack( NFrame::Player::ThisName(), this, &NFCSkillModule::OnClassObjectEvent );
     m_pKernelModule->AddClassCallBack( NFrame::NPC::ThisName(), this, &NFCSkillModule::OnClassObjectEvent );
@@ -156,7 +157,7 @@ int NFCSkillModule::OnUseSkill(const NFGUID& self, const NFIDataList& var)
     return 0;
 }
 
-int NFCSkillModule::OnRequireUseSkillEvent( const NFGUID& self, const int nEventID, const NFIDataList& var )
+int NFCSkillModule::OnRequireUseSkillEvent( const NFGUID& self, const NFEventDefine nEventID, const NFIDataList& var )
 {
     //if ( var.GetCount() < 3)
     //{
@@ -236,7 +237,7 @@ int NFCSkillModule::OnRequireUseSkillEvent( const NFGUID& self, const int nEvent
     return 0;
 }
 
-int NFCSkillModule::OnRequireUseSkillPosEvent( const NFGUID& self, const int nEventID, const NFIDataList& var )
+int NFCSkillModule::OnRequireUseSkillPosEvent( const NFGUID& self, const NFEventDefine nEventID, const NFIDataList& var )
 {
     if ( var.GetCount() < 4 ||
         !var.TypeEx(TDATA_OBJECT, TDATA_FLOAT, TDATA_FLOAT, TDATA_FLOAT, TDATA_OBJECT))

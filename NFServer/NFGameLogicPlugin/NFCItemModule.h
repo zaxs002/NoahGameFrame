@@ -19,6 +19,7 @@
 #include "NFComm/NFPluginModule/NFIHeroModule.h"
 #include "NFComm/NFPluginModule/NFICommonConfigModule.h"
 #include "NFComm/NFPluginModule/NFIGameServerNet_ServerModule.h"
+#include "NFComm/NFPluginModule/NFIEventModule.h"
 
 class NFCItemModule
     : public NFIItemModule
@@ -52,7 +53,8 @@ protected:
 	void OnClienUseItem(const int nSockIndex, const int nMsgID, const char* msg, const uint32_t nLen);
 
 private:
-    NFIKernelModule* m_pKernelModule;
+    NFIEventModule* m_pEventModule;
+	NFIKernelModule* m_pKernelModule;
     NFIPackModule* m_pPackModule;
     NFIElementModule* m_pElementModule;
     NFIClassModule* m_pLogicClassModule;

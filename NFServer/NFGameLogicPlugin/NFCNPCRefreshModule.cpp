@@ -26,6 +26,8 @@ bool NFCNPCRefreshModule::Execute()
 
 bool NFCNPCRefreshModule::AfterInit()
 {
+	m_pScheduleModule = pPluginManager->FindModule<NFIScheduleModule>();
+	m_pEventModule = pPluginManager->FindModule<NFIEventModule>();
     m_pKernelModule = pPluginManager->FindModule<NFIKernelModule>();
     m_pSceneProcessModule = pPluginManager->FindModule<NFISceneProcessModule>();
     m_pElementModule = pPluginManager->FindModule<NFIElementModule>();
@@ -101,7 +103,7 @@ int NFCNPCRefreshModule::OnObjectClassEvent( const NFGUID& self, const std::stri
             m_pKernelModule->SetPropertyInt(self, NFrame::NPC::HP(), nHPMax);
             m_pKernelModule->AddPropertyCallBack( self, NFrame::NPC::HP(), this, &NFCNPCRefreshModule::OnObjectHPEvent );
 
-			m_pKernelModule->AddEventCallBack( self, NFED_ON_OBJECT_BE_KILLED, this, &NFCNPCRefreshModule::OnObjectBeKilled );
+			m_pEventModule->AddEventCallBack( self, NFED_ON_OBJECT_BE_KILLED, this, &NFCNPCRefreshModule::OnObjectBeKilled );
         }
     }
 
@@ -115,9 +117,9 @@ int NFCNPCRefreshModule::OnObjectHPEvent( const NFGUID& self, const std::string&
         NFGUID identAttacker = m_pKernelModule->GetPropertyObject( self, NFrame::NPC::LastAttacker());
         if (!identAttacker.IsNull())
 		{
-            m_pKernelModule->DoEvent( self, NFED_ON_OBJECT_BE_KILLED, NFCDataList() << identAttacker );
+			m_pEventModule->DoEvent( self, NFED_ON_OBJECT_BE_KILLED, NFCDataList() << identAttacker );
 
-            m_pKernelModule->AddHeartBeat( self, "OnDeadDestroyHeart", this, &NFCNPCRefreshModule::OnDeadDestroyHeart, 5.0f, 1 );
+			m_pScheduleModule->AddSchedule( self, "OnDeadDestroyHeart", this, &NFCNPCRefreshModule::OnDeadDestroyHeart, 5.0f, 1 );
         }
     }
 
