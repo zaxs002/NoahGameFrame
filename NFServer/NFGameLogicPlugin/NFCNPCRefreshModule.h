@@ -22,6 +22,7 @@
 #include "NFComm/NFPluginModule/NFIHeroPropertyModule.h"
 #include "NFComm/NFPluginModule/NFIEventModule.h"
 #include "NFComm/NFPluginModule/NFIScheduleModule.h"
+#include "NFComm/NFPluginModule/NFIEventModule.h"
 
 class NFCNPCRefreshModule
     : public NFINPCRefreshModule
@@ -42,7 +43,7 @@ protected:
     int OnObjectClassEvent( const NFGUID& self, const std::string& strClassName, const CLASS_OBJECT_EVENT eClassEvent, const NFIDataList& var );
 
     int OnObjectHPEvent( const NFGUID& self, const std::string& strPropertyName, const NFIDataList::TData& oldVar, const NFIDataList::TData& newVar);
-	int OnObjectBeKilled(const NFGUID& self, const int nEventID, const NFIDataList& var);
+	int OnObjectBeKilled(const NFGUID& self, const NFEventDefine nEventID, const NFIDataList& var);
 
     int OnDeadDestroyHeart( const NFGUID& self, const std::string& strHeartBeat, const float fTime, const int nCount);
 private:

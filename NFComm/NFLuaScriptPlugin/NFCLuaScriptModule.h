@@ -18,6 +18,7 @@
 #include "NFComm/NFPluginModule/NFIScriptModule.h"
 #include "NFComm/NFPluginModule/NFIEventModule.h"
 #include "NFComm/NFPluginModule/NFIScheduleModule.h"
+#include "NFComm/NFPluginModule/NFIEventModule.h"
 
 class NFCLuaScriptModule
     : public NFILuaScriptModule
@@ -37,7 +38,7 @@ public:
 
     bool AddPropertyCallBack(const NFGUID& self, std::string& strPropertyName, std::string& luaFunc);
     bool AddRecordCallBack(const NFGUID& self, std::string& strRecordName, std::string& luaFunc);
-    bool AddEventCallBack(const NFGUID& self, const int nEventID, std::string& luaFunc);
+    bool AddEventCallBack(const NFGUID& self, const NFEventDefine nEventID, std::string& luaFunc);
     bool AddHeartBeat(const NFGUID& self, std::string& strHeartBeatName, std::string& luaFunc, const float fTime, const int nCount);
     int AddRow(const NFGUID& self, std::string& strRecordName, const NFIDataList& var);
 
@@ -52,7 +53,7 @@ protected:
     int OnLuaPropertyCB(const NFGUID& self, const std::string& strPropertyName, const NFIDataList::TData& oldVar, const NFIDataList::TData& newVar);
     int OnLuaRecordCB(const NFGUID& self, const RECORD_EVENT_DATA& xEventData, const NFIDataList::TData& oldVar, const NFIDataList::TData& newVar);
     int OnLuaHeartBeatCB(const NFGUID& self, const std::string& strHeartBeatName, const float fTime, const int nCount);
-    int OnLuaEventCB(const NFGUID& self, const int nEventID, const NFIDataList& argVar);
+    int OnLuaEventCB(const NFGUID& self, const NFEventDefine nEventID, const NFIDataList& argVar);
 
     int OnClassEventCB(const NFGUID& self, const std::string& strClassName, const CLASS_OBJECT_EVENT eClassEvent, const NFIDataList& var);
 

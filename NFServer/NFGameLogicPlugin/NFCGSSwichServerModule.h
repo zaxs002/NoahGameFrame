@@ -23,6 +23,7 @@
 #include "NFComm/NFPluginModule/NFILevelModule.h"
 #include "NFComm/NFPluginModule/NFIPackModule.h"
 #include "NFComm/NFPluginModule/NFIHeroModule.h"
+#include "NFComm/NFPluginModule/NFIEventModule.h"
 
 class NFCGSSwichServerModule
     : public NFIGSSwichServerModule
@@ -55,6 +56,7 @@ private:
 	NFILevelModule* m_pLevelModule;
     NFIPackModule* m_pPackModule;
     NFIHeroModule* m_pHeroModule;
+	NFIEventModule* m_pEventModule;
 };
 
 

@@ -66,7 +66,7 @@ int NFCItemModule::OnClassObjectEvent(const NFGUID& self, const std::string& str
 	return 0;
 }
 
-int NFCItemModule::OnRequireUseItemPosEvent(const NFGUID& self, const int nEventID, const NFIDataList& var)
+int NFCItemModule::OnRequireUseItemPosEvent(const NFGUID& self, const NFEventDefine nEventID, const NFIDataList& var)
 {
 	return 0;
 }

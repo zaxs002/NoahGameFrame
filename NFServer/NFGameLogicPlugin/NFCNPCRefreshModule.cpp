@@ -154,7 +154,7 @@ int NFCNPCRefreshModule::OnDeadDestroyHeart( const NFGUID& self, const std::stri
     return 0;
 }
 
-int NFCNPCRefreshModule::OnObjectBeKilled( const NFGUID& self, const int nEventID, const NFIDataList& var )
+int NFCNPCRefreshModule::OnObjectBeKilled( const NFGUID& self, const NFEventDefine nEventID, const NFIDataList& var )
 {
 	if ( var.GetCount() == 1 && var.Type( 0 ) == TDATA_OBJECT )
 	{

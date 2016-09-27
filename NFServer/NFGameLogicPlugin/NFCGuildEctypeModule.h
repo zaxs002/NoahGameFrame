@@ -17,6 +17,7 @@
 #include "NFComm/NFPluginModule/NFICommonConfigModule.h"
 #include "NFComm/NFPluginModule/NFIGameServerNet_ServerModule.h"
 #include "NFComm/NFPluginModule/NFILogModule.h"
+#include "NFComm/NFPluginModule/NFIEventModule.h"
 
 class NFCGuildEctypeModule
     : public NFIGuildEctypeModule
@@ -64,6 +65,7 @@ private:
     
 	NFMapEx<NFGUID, GuildEctypeInfo> mmGuilEctype;
 	NFIKernelModule* m_pKernelModule;
+	NFIEventModule* m_pEventModule;
 };
 
 

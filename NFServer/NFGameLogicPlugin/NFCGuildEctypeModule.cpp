@@ -36,6 +36,7 @@ bool NFCGuildEctypeModule::AfterInit()
 	m_pKernelModule = pPluginManager->FindModule<NFIKernelModule>();
 	m_pCommonConfigModule = pPluginManager->FindModule<NFICommonConfigModule>();
 	m_pLogModule = pPluginManager->FindModule<NFILogModule>();
+	m_pEventModule = pPluginManager->FindModule<NFIEventModule>();
 
 	std::string strConfigPath = pPluginManager->GetConfigPath();
 
@@ -97,7 +98,7 @@ bool NFCGuildEctypeModule::CreateGuilEctype(const NFGUID& self, const NFGUID& xG
     varEntry << NFINT64(0);
     varEntry << pData->nEctypeID;
     varEntry << pData->nGroupID;
-    m_pKernelModule->DoEvent( xGuild, NFED_ON_CLIENT_ENTER_SCENE, varEntry );
+    m_pEventModule->DoEvent( xGuild, NFED_ON_CLIENT_ENTER_SCENE, varEntry );
 
     return true;
 }
@@ -112,7 +113,7 @@ bool NFCGuildEctypeModule::ApplyEnterGuilEctype(const NFGUID& self, const NFGUID
         varEntry << NFINT64(0);
         varEntry << pData->nEctypeID;
         varEntry << pData->nGroupID;
-        m_pKernelModule->DoEvent( self, NFED_ON_CLIENT_ENTER_SCENE, varEntry );
+		m_pEventModule->DoEvent( self, NFED_ON_CLIENT_ENTER_SCENE, varEntry );
 
         return true;
     }

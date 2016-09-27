@@ -148,7 +148,7 @@ int NFCLuaScriptModule::OnLuaRecordCB(const NFGUID& self, const RECORD_EVENT_DAT
     return CallLuaFuncFromMap(m_luaRecordCallBackFuncMap, xEventData.strRecordName, self, xEventData.strRecordName, xEventData.nOpType, xEventData.nRow, xEventData.nCol, oldVar, newVar);
 }
 
-bool NFCLuaScriptModule::AddEventCallBack(const NFGUID& self, const int nEventID, std::string& luaFunc)
+bool NFCLuaScriptModule::AddEventCallBack(const NFGUID& self, const NFEventDefine nEventID, std::string& luaFunc)
 {
     if (AddLuaFuncToMap(m_luaEventCallBackFuncMap, self, (int)nEventID, luaFunc))
     {
@@ -157,9 +157,9 @@ bool NFCLuaScriptModule::AddEventCallBack(const NFGUID& self, const int nEventID
     return true;
 }
 
-int NFCLuaScriptModule::OnLuaEventCB(const NFGUID& self, const int nEventID, const NFIDataList& argVar)
+int NFCLuaScriptModule::OnLuaEventCB(const NFGUID& self, const NFEventDefine nEventID, const NFIDataList& argVar)
 {
-    return CallLuaFuncFromMap(m_luaEventCallBackFuncMap, nEventID, self, nEventID, (NFCDataList&)argVar);
+    return CallLuaFuncFromMap(m_luaEventCallBackFuncMap, (int)nEventID, self, nEventID, (NFCDataList&)argVar);
 }
 
 bool NFCLuaScriptModule::AddHeartBeat(const NFGUID& self, std::string& strHeartBeatName, std::string& luaFunc, const float fTime, const int nCount)
@@ -286,8 +286,6 @@ bool NFCLuaScriptModule::Regisger()
     .addFunction("CreateScene", &NFIKernelModule::CreateScene)
     .addFunction("CreateObject", &NFIKernelModule::CreateObject)
     .addFunction("DoEvent", (bool (NFIKernelModule::*)(const NFGUID&, const int, const NFIDataList&))&NFIKernelModule::DoEvent)
-    .addFunction("FindHeartBeat", &NFIKernelModule::FindHeartBeat)
-    .addFunction("RemoveHeartBeat", &NFIKernelModule::RemoveHeartBeat)
     .addFunction("ExistContainer", &NFIKernelModule::ExistContainer)
     .addFunction("SetPropertyInt", &NFIKernelModule::SetPropertyInt)
     .addFunction("SetPropertyFloat", &NFIKernelModule::SetPropertyFloat)

@@ -13,6 +13,8 @@
 #include "NFComm/NFPluginModule/NFILogModule.h"
 #include "NFComm/NFPluginModule/NFIPluginManager.h"
 #include "NFComm/NFPluginModule/NFIGameServerNet_ServerModule.h"
+#include "NFComm/NFPluginModule/NFIScheduleModule.h"
+#include "NFComm/NFPluginModule/NFIEventModule.h"
 
 class NFCSLGBuildingModule : public NFISLGBuildingModule
 {
@@ -60,6 +62,8 @@ private:
 	NFIKernelModule* m_pKernelModule;
 	NFILogModule* m_pLogModule;
 	NFIGameServerNet_ServerModule* m_pGameServerNet_ServerModule;
+	NFIScheduleModule* m_pScheduleModule;
+	NFIEventModule* m_pEventModule;
 };
 
 #endif // !__NFC_SLG_BUILDING_MODULE_H_

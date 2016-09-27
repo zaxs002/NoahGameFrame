@@ -8,6 +8,7 @@
 
 #include "NFCMapModule.h"
 #include "NFComm/NFMessageDefine/NFProtocolDefine.hpp"
+#include "NFComm/NFCore/NFTime.h"
 
 bool NFCMapModule::Init()
 {
@@ -199,7 +200,7 @@ void NFCMapModule::ReqMapHunting(const int nSockIndex, const int nMsgID, const c
 		return;
 	}
 
-	xGridBaseInfo.set_hurting_time(NFTime::GetNowTime());
+	xGridBaseInfo.set_hurting_time(NFTime::GetTime());
 	xGridBaseInfo.mutable_hurter()->CopyFrom(NFINetModule::NFToPB(nPlayerID));
 
 	m_pBigMapRedisModule->SetGridBaseInfo(xMsg.map_title_id(), xGridBaseInfo);
@@ -222,7 +223,7 @@ void NFCMapModule::ReqMapKingWar(const int nSockIndex, const int nMsgID, const c
 		return;
 	}
 
-	xGridBaseInfo.set_kingwar_time(NFTime::GetNowTime());
+	xGridBaseInfo.set_kingwar_time(NFTime::GetTime());
 	xGridBaseInfo.mutable_kingwarrer()->CopyFrom(NFINetModule::NFToPB(nPlayerID));
 
 	m_pBigMapRedisModule->SetGridBaseInfo(xMsg.map_title_id(), xGridBaseInfo);

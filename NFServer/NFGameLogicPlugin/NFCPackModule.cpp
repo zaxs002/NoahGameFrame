@@ -7,6 +7,7 @@
 // -------------------------------------------------------------------------
 
 #include "NFCPackModule.h"
+#include "NFComm/NFCore/NFTime.h"
 
 bool NFCPackModule::Init()
 {
@@ -69,7 +70,7 @@ const NFGUID& NFCPackModule::CreateEquip( const NFGUID& self, const std::string&
 
 	var->SetObject(NFrame::Player::BagEquipList_GUID, ident);
 	var->SetString(NFrame::Player::BagEquipList_ConfigID, strConfigName.c_str());
-	var->SetInt(NFrame::Player::BagEquipList_Date, NFTime::GetNowTime());
+	var->SetInt(NFrame::Player::BagEquipList_Date, NFTime::GetTime());
 
 
 	int nAddRow = pRecord->AddRow(-1, *var);
@@ -115,7 +116,7 @@ bool NFCPackModule::CreateItem( const NFGUID& self, const std::string& strConfig
 
 		xRowData->SetString(NFrame::Player::BagItemList_ConfigID, strConfigName);
 		xRowData->SetInt(NFrame::Player::BagItemList_ItemCount, nCount);
-		xRowData->SetInt(NFrame::Player::BagItemList_Date, NFTime::GetNowTime());
+		xRowData->SetInt(NFrame::Player::BagItemList_Date, NFTime::GetTime());
 	}
 	else
 	{

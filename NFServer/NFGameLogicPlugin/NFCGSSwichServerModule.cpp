@@ -36,6 +36,7 @@ bool NFCGSSwichServerModule::AfterInit()
     m_pHeroModule = pPluginManager->FindModule<NFIHeroModule>();
 	m_pGameServerToWorldModule = pPluginManager->FindModule<NFIGameServerToWorldModule>();
 	m_pGameServerNet_ServerModule = pPluginManager->FindModule<NFIGameServerNet_ServerModule>();
+	m_pEventModule = pPluginManager->FindModule<NFIEventModule>();
 
 	if (!m_pGameServerNet_ServerModule->GetNetModule()->AddReceiveCallBack(NFMsg::EGMI_REQSWICHSERVER, this, &NFCGSSwichServerModule::OnClientReqSwichServer)) { return false; }
 	if (!m_pGameServerToWorldModule->GetClusterClientModule()->AddReceiveCallBack(NFMsg::EGMI_REQSWICHSERVER, this, &NFCGSSwichServerModule::OnReqSwichServer)) { return false; }
@@ -137,7 +138,7 @@ void NFCGSSwichServerModule::OnReqSwichServer(const int nSockIndex, const int nM
     varEntry << NFINT64(0);
     varEntry << nSceneID;
     varEntry << nGroup;
-    m_pKernelModule->DoEvent(pObject->Self(), NFED_ON_CLIENT_ENTER_SCENE, varEntry);
+	m_pEventModule->DoEvent(pObject->Self(), NFED_ON_CLIENT_ENTER_SCENE, varEntry);
 
     if (!m_pGameServerNet_ServerModule->AddPlayerGateInfo(nPlayerID, nClientID, nGateID))
     {
