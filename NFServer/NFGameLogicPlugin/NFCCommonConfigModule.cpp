@@ -6,9 +6,8 @@
 //    @Desc                 :
 // -------------------------------------------------------------------------
 
-#include "NFComm/RapidXML/rapidxml_utils.hpp"
-
 #include "NFCCommonConfigModule.h"
+#include "Dependencies/RapidXML/rapidxml_utils.hpp"
 
 bool NFCCommonConfigModule::Init()
 {
@@ -167,7 +166,13 @@ bool NFCCommonConfigModule::LoadConfig(const std::string& strFile)
 					}
 				}
 			}
-		}	}	catch(...)	{		return false;	}
+		}
+	}
+	catch(...)
+	{
+		return false;
+	}
+
 	return true;
 }
 

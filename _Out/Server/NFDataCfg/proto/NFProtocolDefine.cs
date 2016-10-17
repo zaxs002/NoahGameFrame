@@ -223,6 +223,9 @@ public class EffectData
 	public static readonly String MAXHP = "MAXHP"; // int
 	public static readonly String MAXMP = "MAXMP"; // int
 	public static readonly String MAXSP = "MAXSP"; // int
+	public static readonly String HP = "HP"; // int
+	public static readonly String MP = "MP"; // int
+	public static readonly String SP = "SP"; // int
 	public static readonly String HPREGEN = "HPREGEN"; // int
 	public static readonly String SPREGEN = "SPREGEN"; // int
 	public static readonly String MPREGEN = "MPREGEN"; // int

@@ -6,9 +6,8 @@
 //    @Desc                 :
 // -------------------------------------------------------------------------
 
-#include "NFComm/RapidXML/rapidxml_utils.hpp"
-
 #include "NFCGuildEctypeModule.h"
+#include "Dependencies/RapidXML/rapidxml_utils.hpp"
 #include "NFComm/NFMessageDefine/NFProtocolDefine.hpp"
 #include "NFComm/NFPluginModule/NFINetModule.h"
 

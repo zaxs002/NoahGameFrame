@@ -208,6 +208,9 @@ public class EffectData {
 	public static final String MAXHP = "MAXHP"; // int
 	public static final String MAXMP = "MAXMP"; // int
 	public static final String MAXSP = "MAXSP"; // int
+	public static final String HP = "HP"; // int
+	public static final String MP = "MP"; // int
+	public static final String SP = "SP"; // int
 	public static final String HPREGEN = "HPREGEN"; // int
 	public static final String SPREGEN = "SPREGEN"; // int
 	public static final String MPREGEN = "MPREGEN"; // int

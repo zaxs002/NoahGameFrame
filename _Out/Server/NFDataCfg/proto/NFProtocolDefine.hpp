@@ -231,6 +231,9 @@ public:
 	static const std::string& MAXHP(){ static std::string xMAXHP = "MAXHP"; return xMAXHP; } // int
 	static const std::string& MAXMP(){ static std::string xMAXMP = "MAXMP"; return xMAXMP; } // int
 	static const std::string& MAXSP(){ static std::string xMAXSP = "MAXSP"; return xMAXSP; } // int
+	static const std::string& HP(){ static std::string xHP = "HP"; return xHP; } // int
+	static const std::string& MP(){ static std::string xMP = "MP"; return xMP; } // int
+	static const std::string& SP(){ static std::string xSP = "SP"; return xSP; } // int
 	static const std::string& HPREGEN(){ static std::string xHPREGEN = "HPREGEN"; return xHPREGEN; } // int
 	static const std::string& SPREGEN(){ static std::string xSPREGEN = "SPREGEN"; return xSPREGEN; } // int
 	static const std::string& MPREGEN(){ static std::string xMPREGEN = "MPREGEN"; return xMPREGEN; } // int
