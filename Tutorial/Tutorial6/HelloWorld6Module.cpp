@@ -1,5 +1,4 @@
 #include "HelloWorld6Module.h"
-#include "NFComm/NFCore/NFTimer.h"
 
 bool HelloWorld6Module::Init()
 {
