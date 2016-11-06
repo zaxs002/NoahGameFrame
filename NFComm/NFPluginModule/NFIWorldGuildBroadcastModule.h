@@ -9,10 +9,10 @@
 #ifndef NFI_WORLD_GUILD_BROADCAST_MODULE_H
 #define NFI_WORLD_GUILD_BROADCAST_MODULE_H
 
-#include "NFIModule.h"
+#include "NFILogicModule.h"
 
 class NFIWorldGuildBroadcastModule
-    : public NFIModule
+    : public NFILogicModule
 {
 public:
 

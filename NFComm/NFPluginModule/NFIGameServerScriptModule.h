@@ -10,10 +10,10 @@
 #define NFI_GAMESERVERSCRIPT_MODULE_H
 
 #include <iostream>
-#include "NFIModule.h"
+#include "NFILogicModule.h"
 
 class NFIGameServerScriptModule
-    : public NFIModule
+    : public NFILogicModule
 {
 
 public:
